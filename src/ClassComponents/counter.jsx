@@ -21,7 +21,7 @@ class Counter extends Component {
         <button onClick={this.onIncrement}>Increment</button>
         <button
           onClick={() => {
-            this.setState({ counter: this.state.counter - 1 });
+            this.setState({ counter: counter - 1 });
           }}
         >
           Decrement
