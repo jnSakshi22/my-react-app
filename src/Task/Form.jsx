@@ -2,6 +2,8 @@ import { Component } from "react";
 import "./style.css";
 import Modal from "react-modal";
 
+const interestsList = ["Sports", "Music", "Reading", "Coding"];
+
 class InputForm extends Component {
   state = {
     fName: "",
@@ -9,12 +11,49 @@ class InputForm extends Component {
     email: "",
     password: "",
     submit: false,
-    value: 1,
+    range_value: 1,
     show: false,
     gender: "",
     interests_data: [],
     date_value: "",
   };
+
+  onInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log({ name, value });
+
+    this.setState({ [name]: value });
+  };
+
+  setGender = (e) => {
+    this.setState({ gender: e.target.value });
+  };
+
+  onSubmitBtn = () => {
+    const { fName, lName, email, password } = this.state;
+    const isValid =
+      fName !== "" &&
+      lName !== "" &&
+      email !== "" &&
+      password !== "" &&
+      password.length > 8;
+
+    this.setState({ submit: !this.state.submit, show: isValid });
+  };
+
+  setInterests = (val) => {
+    const { interests_data } = this.state;
+    const updatedInterests = interests_data.includes(val)
+      ? interests_data.filter((item) => item !== val)
+      : [...interests_data, val];
+
+    this.setState({ interests_data: updatedInterests });
+  };
+
+  closeModal = () => {
+    this.setState({ show: !this.state.show });
+  };
+
   render() {
     const {
       fName,
@@ -22,70 +61,14 @@ class InputForm extends Component {
       email,
       password,
       submit,
-      value,
+      range_value,
       show,
       gender,
       interests_data,
       date_value,
     } = this.state;
 
-    const onInputFirstName = (e) => {
-      this.setState({ fName: e.target.value });
-    };
-    const onInputLastName = (e) => {
-      this.setState({ lName: e.target.value });
-    };
-
-    const onInputEmail = (e) => {
-      this.setState({ email: e.target.value });
-    };
-
-    const onSubmitBtn = () => {
-      this.setState({ submit: !submit });
-      fName != "" &&
-        lName != "" &&
-        email != "" &&
-        password != "" &&
-        password.length > 8 &&
-        this.setState({ show: !show });
-    };
-
-    const onInputPwd = (e) => {
-      this.setState({ password: e.target.value });
-    };
-
-    const onInputRange = (e) => {
-      this.setState({ value: e.target.value });
-    };
-    const setGender = (e) => {
-      this.setState({
-        gender: e.target.value,
-      });
-    };
-
-    const setInterests = (val) => {
-      const interests_data = this.state.interests_data;
-      const findIdx = interests_data.indexOf(val);
-
-      if (findIdx > -1) {
-        interests_data.splice(findIdx, 1);
-      } else {
-        interests_data.push(val);
-      }
-
-      this.setState({
-        interests_data: interests_data,
-      });
-    };
-
-    const setDate = (e) => {
-      this.setState({ date_value: e.target.value });
-    };
-
-    const closeModal = () => {
-      this.setState({ show: !show });
-      window.location.reload();
-    };
+    console.log("State: ", this.state);
 
     return (
       <div className="container">
@@ -99,10 +82,11 @@ class InputForm extends Component {
             </h4>
             <input
               className="inputtxtType"
+              name="fName"
               type="text"
               placeholder="Enter your First Name..."
               value={fName}
-              onChange={onInputFirstName}
+              onChange={this.onInputChange}
             />
             {submit && fName === "" && (
               <div>
@@ -117,11 +101,10 @@ class InputForm extends Component {
             <input
               className="inputtxtType"
               type="text"
+              name="lName"
               placeholder="Enter your Last Name..."
               value={lName}
-              min="8"
-              onChange={onInputLastName}
-              required
+              onChange={this.onInputChange}
             />
             {submit && lName === "" && (
               <div>
@@ -136,9 +119,10 @@ class InputForm extends Component {
             <input
               className="inputtxtType"
               type="email"
+              name="email"
               placeholder="Enter your Email..."
               value={email}
-              onChange={onInputEmail}
+              onChange={this.onInputChange}
               required
             />
             {submit && (email === "" || !email.includes("@")) && (
@@ -156,8 +140,9 @@ class InputForm extends Component {
             <input
               className="inputtxtType"
               type="password"
+              name="password"
               value={password}
-              onChange={onInputPwd}
+              onChange={this.onInputChange}
             />
             {submit && (password === "" || password.length < 8) && (
               <div>
@@ -178,18 +163,20 @@ class InputForm extends Component {
               <div className="inputRadioType ">
                 <input
                   type="radio"
+                  name="Male"
                   checked={gender == "Male"}
-                  onChange={setGender}
+                  onChange={this.setGender}
                   value="Male"
                 />{" "}
-                Male
+                <label>Male</label>
                 <input
                   type="radio"
+                  name="Female"
                   checked={gender == "Female"}
-                  onChange={setGender}
+                  onChange={this.setGender}
                   value="Female"
                 />{" "}
-                Female
+                <label>Female</label>
               </div>
             </div>
             <div className="inputField">
@@ -199,42 +186,19 @@ class InputForm extends Component {
                 </h4>
               </div>
               <div className="inputCheckboxType">
-                <div className="checkboxes">
-                  <input
-                    type="checkbox"
-                    name="Sports"
-                    value="Sports"
-                    onChange={(e) => setInterests(e.target.value)}
-                  />
-                  Sports
-                </div>
-                <div className="checkboxes">
-                  <input
-                    type="checkbox"
-                    name="Music"
-                    value="Music"
-                    onChange={(e) => setInterests(e.target.value)}
-                  />
-                  Music
-                </div>
-                <div className="checkboxes">
-                  <input
-                    type="checkbox"
-                    name="Reading"
-                    value="Reading"
-                    onChange={(e) => setInterests(e.target.value)}
-                  />
-                  Reading
-                </div>
-                <div className="checkboxes">
-                  <input
-                    type="checkbox"
-                    name="Coding"
-                    value="Coding"
-                    onChange={(e) => setInterests(e.target.value)}
-                  />
-                  Coding
-                </div>
+                {interestsList.map((item) => {
+                  return (
+                    <div className="checkboxes" key={item}>
+                      <input
+                        type="checkbox"
+                        name={item}
+                        value={item}
+                        onChange={(e) => this.setInterests(e.target.value)}
+                      />
+                      <label>{item}</label>
+                    </div>
+                  );
+                })}
               </div>
             </div>
             <div className="inputField">
@@ -246,13 +210,14 @@ class InputForm extends Component {
               <div>
                 <input
                   className="inputtxtType"
+                  name="range_value"
                   type="range"
                   min={1}
                   max={100}
-                  value={value}
-                  onChange={onInputRange}
+                  value={range_value}
+                  onChange={this.onInputChange}
                 />
-                <p>Age: {value} yrs.</p>
+                <p>Age: {range_value} yrs.</p>
               </div>
             </div>
             <div className="inputField">
@@ -263,16 +228,21 @@ class InputForm extends Component {
               </div>
               <div>
                 <input
+                  name="date_value"
                   value={date_value}
                   type="date"
                   className="inputtxtType"
-                  onChange={setDate}
+                  onChange={this.onInputChange}
                 />
               </div>
             </div>
           </div>
           <div className="submitBtn">
-            <input className="btnType" type="submit" onClick={onSubmitBtn} />
+            <input
+              className="btnType"
+              type="submit"
+              onClick={this.onSubmitBtn}
+            />
           </div>
           {show && (
             <Modal isOpen={show}>
@@ -289,9 +259,9 @@ class InputForm extends Component {
                     return <span key={item}>{item} </span>;
                   })}
                 </p>
-                <p>Age: {value} yrs.</p>
+                <p>Age: {range_value} yrs.</p>
                 <p>DOB: {date_value}</p>
-                <button className="btnType" onClick={closeModal}>
+                <button className="btnType" onClick={this.closeModal}>
                   Close
                 </button>
               </div>
