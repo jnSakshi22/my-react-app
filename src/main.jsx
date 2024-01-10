@@ -1,4 +1,4 @@
 import ReactDOM from "react-dom/client";
-import InputForm from "./Task/Form";
+import ToDoApp from "./Task/toDoApp";
 
-ReactDOM.createRoot(document.getElementById("root")).render(<InputForm />);
+ReactDOM.createRoot(document.getElementById("root")).render(<ToDoApp />);
