@@ -1,0 +1,63 @@
+.container {
+  margin: auto;
+  width: 40%;
+  border: 1px solid grey;
+  padding: 10px;
+}
+.main-header {
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+.sub-container {
+  display: flex;
+  gap: 18px;
+}
+.header-txt {
+  margin-bottom: 5px;
+}
+.name-inputBox {
+  height: 28px;
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+.label-txt {
+  margin-top: 5px;
+  font-size: 10px;
+  color: grey;
+}
+.bd-container {
+  display: flex;
+  gap: 18px;
+}
+.bd-inputbox {
+  height: 28px;
+  width: 80px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.address-inputBox {
+  height: 28px;
+  width: 495px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+.sub-inputbox {
+  height: 28px;
+  width: 234px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+.comments-inputBox {
+  height: 240px;
+  width: 490px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  margin-top: 5px;
+}

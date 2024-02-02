@@ -1,21 +1,30 @@
 import WifiConnected from "./wificonnected";
 import WifiNotConnected from "./wifinotConnected";
 import useInternetOptions from "./useInternetOptions";
+import "./app.css";
 
 const InternetOptions = () => {
-  const { internet } = useInternetOptions();
+  const { isOnline } = useInternetOptions();
 
   return (
     <>
-      {internet ? (
+      {isOnline ? (
         <>
-          <h4>You are Online</h4>
-          <WifiConnected style={{ width: "20px", height: "20px" }} />
+          <div className="container">
+            <h1>
+              <strong>Hey!! You are Online...</strong>
+            </h1>
+            <WifiConnected />
+          </div>
         </>
       ) : (
         <>
-          <h4>You are Offline</h4>
-          <WifiNotConnected />
+          <div className="container">
+            <h1>
+              <strong>Oops!! You are Offline...</strong>
+            </h1>
+            <WifiNotConnected />
+          </div>
         </>
       )}
     </>

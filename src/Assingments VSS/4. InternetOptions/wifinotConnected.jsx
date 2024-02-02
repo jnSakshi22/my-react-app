@@ -5,10 +5,9 @@ const WifiNotConnected = () => {
   const styles = {
     checkAnimation: {
       position: "absolute",
-      width: "150%",
-      height: "115%",
-      marginLeft: "-17%",
-      marginTop: "-7%",
+      width: "100%",
+      height: "50%",
+      marginTop: "40%",
     },
   };
   const options = {

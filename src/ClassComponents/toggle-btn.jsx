@@ -14,12 +14,21 @@ class ToggleBtn extends Component {
     return (
       <div
         style={{
-          height: "100vh",
-          /* display: "flex",
-          alignItems: "center",
-          justifyContent: "center", */
-          display: "grid",
-          placeItems: "center",
+          display: "block",
+          position: "relative",
+          height: "100%",
+          textAlign: "center",
+
+          // position: "absolute",
+          // top: "50%",
+          // left: "50%",
+          // transform: "translate(-50%, -50%)",
+          // height: "100vh",
+          // /* display: "flex",
+          // alignItems: "center",
+          // justifyContent: "center", */
+          // display: "grid",
+          // placeItems: "center",
         }}
       >
         <button

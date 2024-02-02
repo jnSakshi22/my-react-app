@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const useInternetOptions = () => {
-  const [internet, setInternet] = useState(true);
+  const [isOnline, setIsOnline] = useState(window.navigator.onLine);
 
   useEffect(() => {
+    // Update network status
     const handleStatusChange = () => {
-      const isOnline = window.navigator.onLine;
-      setInternet(isOnline);
+      setIsOnline(window.navigator.onLine);
 
-      if (isOnline) {
+      if (window.navigator.onLine) {
         toast("Hey!! You are online. Please continue browsing...", {
           position: "top-right",
           autoClose: 5000,
@@ -37,14 +37,22 @@ const useInternetOptions = () => {
       }
     };
 
-    const intervalID = setInterval(handleStatusChange, 1000);
+    handleStatusChange();
 
+    // Listen to the online status
+    window.addEventListener("online", handleStatusChange);
+
+    // Listen to the offline status
+    window.addEventListener("offline", handleStatusChange);
+
+    // Specify how to clean up after this effect for performance improvment
     return () => {
-      clearInterval(intervalID);
+      window.removeEventListener("online", handleStatusChange);
+      window.removeEventListener("offline", handleStatusChange);
     };
   }, []);
 
-  return { internet };
+  return { isOnline };
 };
 
 export default useInternetOptions;
