@@ -1,5 +1,5 @@
 import { useLottie } from "lottie-react";
-import loadingAnim from "./loading-anim.json";
+import loadingAnim from "./Loading-anime.json";
 
 const LoadingCircle = () => {
   const options = {
