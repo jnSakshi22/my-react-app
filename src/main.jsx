@@ -1,12 +1,11 @@
 import ReactDOM from "react-dom/client";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Products from "./Assingments/4. InternetOptions/pages/products/Products.Layouts";
-import Issues from "./Day-14 Performance/1. Performance-Issue";
+import HomeUsingContextV2 from "./Day-16 ContextAPI copy/Home";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <>
-    <Issues />
+    <HomeUsingContextV2 />
     <ToastContainer />
   </>
 );
